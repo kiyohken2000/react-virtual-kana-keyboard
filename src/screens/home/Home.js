@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import ScreenTemplate from '../../components/ScreenTemplate'
 import { colors, fontSize } from "../../theme";
-import KanaKeyboard from "../../components/KanaKeyboard/KanaKeyboard";
+import { KanaKeyboard } from "../../components/KanaKeyboard";
 
 export default function Home() {
   const [text, setText] = useState('')
