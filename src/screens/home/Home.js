@@ -5,28 +5,53 @@ import { colors, fontSize } from "../../theme";
 import KanaKeyboard from "../../components/KanaKeyboard/KanaKeyboard";
 
 export default function Home() {
-  const [moji, setMoji] = useState('')
+  const [text, setText] = useState('')
+  const [textLines, setTextLines] = useState([])
 
-  const onPress = ({val}) => {
+  const onInput = ({val, isShiftInput}) => {
     if(!val) return
-    setMoji(val)
+    setText(prev => {
+      if(isShiftInput) {
+        const tempText = prev.slice(0, -1)
+        return `${tempText}${val}`
+      } else {
+        return `${prev}${val}`
+      }
+    })
   }
 
   const onEnterPress = () => {
-    console.log('on enter press')
+    if(!text) return
+    setTextLines(prev => {
+      return [...prev, text]
+    })
+    setText('')
+  }
+
+  const onBackspacePress = () => {
+    if(!text) return
+    setText(prev => prev.slice(0, -1))
   }
 
   return (
     <ScreenTemplate>
       <View style={styles.container}>
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <Text style={{fontSize: fontSize.xxxLarge}}>{moji}</Text>
+          <Text>入力した</Text>
+          {textLines.map((item, i) => {
+            return (
+              <Text key={i} style={{fontSize: fontSize.xxxLarge}}>{item}</Text>
+            )
+          })}
+          <Text>入力中：
+            <Text style={{fontSize: fontSize.xxxLarge}}>{text}</Text>
+          </Text>
         </View>
         <View style={{flex: 0.7}}>
           <KanaKeyboard
-            onPress={onPress}
+            onInput={onInput}
             onEnterPress={onEnterPress}
-            moji={moji}
+            onBackspacePress={onBackspacePress}
           />
         </View>
       </View>

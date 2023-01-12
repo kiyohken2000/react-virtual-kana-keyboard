@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { View, TouchableOpacity, StyleSheet, Text } from "react-native";
 import { useSwipeable } from "react-swipeable";
 import PaletContainer from "./PaletContainer";
-import { keyboardStyles } from "./config";
+import { keyboardStyles, keyboardSettings } from "./config";
 
 export default function Symbol(props) {
-  const { symbol, values, onPress, buttonVisible, setButtonVisible, keySize } = props
+  const { symbol, values, onInput, buttonVisible, setButtonVisible, keySize,  setMoji } = props
   const [paletVisible, setPaletVisible] = useState(false)
 
   const onPressIn = (e) => {
@@ -20,21 +20,26 @@ export default function Symbol(props) {
 
   const handlers = useSwipeable({
     onTap: ({event}) => {
-      onPress({val: values[0]})
+      setMoji(values[0])
+      onInput({val: values[0], isShiftInput: false})
     },
     onSwipedLeft: (event) => {
-      onPress({val: values[1]})
+      setMoji(values[1])
+      onInput({val: values[1], isShiftInput: false})
     },
     onSwipedUp: (event) => {
-      onPress({val: values[2]})
+      setMoji(values[2])
+      onInput({val: values[2], isShiftInput: false})
     },
     onSwipedRight: (event) => {
-      onPress({val: values[3]})
+      setMoji(values[3])
+      onInput({val: values[3], isShiftInput: false})
     },
     onSwipedDown: (event) => {
-      onPress({val: values[4]})
+      setMoji(values[4])
+      onInput({val: values[4], isShiftInput: false})
     },
-    trackMouse: true, //マウス操作でのスワイプを許可する場合はtrue
+    trackMouse: keyboardSettings.trackMouse
   });
 
   return (

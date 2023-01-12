@@ -1,4 +1,6 @@
 import { colors, fontSize } from "../../theme";
+import { Dimensions } from "react-native";
+const { width } = Dimensions.get('window')
 
 const keyboardStyles = {
   padding: 1,
@@ -14,6 +16,15 @@ const keyboardStyles = {
   paletBackgroundColor: colors.floralwhite,
   paletSymbolColor: colors.black,
   emptyKeyColor: colors.floralwhite,
+  backspaceIconSize: fontSize.xxxxLarge,
+  backspaceIconColor: colors.darkPurple,
+}
+
+const keyboardSettings = {
+  shiftVisible: true,
+  backspaceVisible: true,
+  trackMouse: true, //マウス操作でのスワイプを許可する場合はtrue
+  keySize: width / 6,
 }
 
 const keyValues = {
@@ -43,4 +54,4 @@ const keyValues = {
   ]
 }
 
-export { keyboardStyles, keyValues }
+export { keyboardStyles, keyValues, keyboardSettings }

@@ -1,7 +1,7 @@
 import React from "react";
 import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { IconContext } from "react-icons";
-import { IoSearchOutline } from "react-icons/io5"
+import { AiOutlineEnter } from "react-icons/ai"
 import { keyboardStyles } from "./config";
 
 export default function EnterKey(props) {
@@ -14,7 +14,7 @@ export default function EnterKey(props) {
         onPress={onEnterPress}
       >
         <IconContext.Provider value={{ color: keyboardStyles.enterIconColor, size: keyboardStyles.enterIconSize }}>
-          <IoSearchOutline />
+          <AiOutlineEnter />
         </IconContext.Provider>
       </TouchableOpacity>
     </View>
